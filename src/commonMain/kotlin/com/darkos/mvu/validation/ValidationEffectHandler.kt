@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
 
 class ValidationEffectHandler private constructor(
     private val processors: HashMap<KClass<out ValidationFieldType>, suspend (Field) -> Boolean>
-) : EffectHandler {
+) : ValidationHandler {
 
     //region validators
 
