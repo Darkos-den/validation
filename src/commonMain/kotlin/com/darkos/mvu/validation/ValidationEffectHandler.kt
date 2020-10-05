@@ -1,18 +1,17 @@
 package com.darkos.mvu.validation
 
-import com.darkos.mvu.EffectHandler
+import com.darkos.mvu.models.Effect
+import com.darkos.mvu.models.Message
 import com.darkos.mvu.validation.model.Field
 import com.darkos.mvu.validation.model.FieldValidationStatus
 import com.darkos.mvu.validation.model.ValidationFieldType
 import com.darkos.mvu.validation.model.mvu.ValidationEffect
 import com.darkos.mvu.validation.model.mvu.ValidationMessage
-import com.darkos.mvu.models.Effect
-import com.darkos.mvu.models.Message
 import kotlin.reflect.KClass
 
 class ValidationEffectHandler private constructor(
     private val processors: HashMap<KClass<out ValidationFieldType>, suspend (Field) -> Boolean>
-) : ValidationHandler {
+) : IValidationHandler {
 
     //region validators
 
