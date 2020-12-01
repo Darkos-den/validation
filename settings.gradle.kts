@@ -10,5 +10,5 @@ rootProject.name = "validation-handler"
 
 enableFeaturePreview("GRADLE_METADATA")
 
-include(":lib")
+include(":handler")
 
