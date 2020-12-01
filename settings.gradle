@@ -1,4 +1,0 @@
-rootProject.name = 'validation'
-
-
-enableFeaturePreview('GRADLE_METADATA')

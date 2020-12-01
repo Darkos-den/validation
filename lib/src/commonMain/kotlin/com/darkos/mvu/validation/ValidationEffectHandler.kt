@@ -1,7 +1,7 @@
 package com.darkos.mvu.validation
 
-import com.darkos.mvu.models.Effect
-import com.darkos.mvu.models.Message
+import com.darkos.mvu.model.Effect
+import com.darkos.mvu.model.Message
 import com.darkos.mvu.validation.model.Field
 import com.darkos.mvu.validation.model.FieldValidationStatus
 import com.darkos.mvu.validation.model.ValidationFieldType
@@ -9,8 +9,10 @@ import com.darkos.mvu.validation.model.mvu.ValidationEffect
 import com.darkos.mvu.validation.model.mvu.ValidationMessage
 import kotlin.reflect.KClass
 
+typealias FieldTypeClass = KClass<out ValidationFieldType>
+
 class ValidationEffectHandler private constructor(
-    private val processors: HashMap<KClass<out ValidationFieldType>, suspend (Field) -> Boolean>
+    private val processors: HashMap<FieldTypeClass, suspend (Field) -> Boolean>
 ) : IValidationHandler {
 
     //region validators
@@ -76,9 +78,9 @@ class ValidationEffectHandler private constructor(
         }
     }
 
+    @ValidationHandlerDsl
     class Builder {
-        private val processors =
-            hashMapOf<KClass<out ValidationFieldType>, suspend (Field) -> Boolean>()
+        private val processors = hashMapOf<FieldTypeClass, suspend (Field) -> Boolean>()
 
         fun ValidateEmail(block: suspend (Field) -> Boolean) {
             processors[ValidationFieldType.Email::class] = block
