@@ -70,7 +70,7 @@ class ValidationEffectHandler private constructor(
         }.takeIf {
             it.isNotEmpty()
         }?.map {
-            it.copy(status = FieldValidationStatus.INVALID)
+            it.id
         }?.let {
             ValidationMessage.Error(it)
         } ?: run {
@@ -94,3 +94,6 @@ class ValidationEffectHandler private constructor(
     }
 }
 
+@ValidationHandlerDsl
+fun ValidationHandler(block: ValidationEffectHandler.Builder.() -> Unit): ValidationEffectHandler =
+    ValidationEffectHandler.Builder().apply(block).build()
