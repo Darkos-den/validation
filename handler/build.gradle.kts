@@ -1,4 +1,5 @@
 import java.util.Date
+import java.util.Properties
 
 plugins {
     id("com.android.library")
@@ -98,9 +99,17 @@ afterEvaluate {
         }
 }
 
+fun getLocalProperties(): Properties {
+    return Properties().apply {
+        load(project.rootProject.file("local.properties").inputStream())
+    }
+}
+
 bintray {
-    user = ""
-    key = ""
+    val p = getLocalProperties()
+
+    user = p.getProperty("bintrayUser")
+    key = p.getProperty("bintrayKey")
     publish = false
 
     pkg.apply {
